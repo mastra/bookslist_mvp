@@ -1,10 +1,10 @@
 package com.molol.possible
-
+// daniel mastracchio mastra@gmail.com
+//
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.molol.possible.model.Book
-import com.molol.possible.repository.BookRepository
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.doAsync
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -28,17 +28,15 @@ class MainActivity : AppCompatActivity(), BookView {
 
         linearLayoutManager = LinearLayoutManager(this)
         adapter = BookRecyclerAdapter()
+
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = adapter
         val dividerItemDecoration = DividerItemDecoration( recyclerView.context, linearLayoutManager.getOrientation()
         )
         recyclerView.addItemDecoration(dividerItemDecoration)
 
-
         doAsync {
-
             presenter.getBooks()
-
         }
     }
 

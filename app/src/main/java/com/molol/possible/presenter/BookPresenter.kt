@@ -1,6 +1,7 @@
 package com.molol.possible.presenter
+// daniel mastracchio mastra@gmail.com
+//
 
-import com.molol.possible.model.Book
 import com.molol.possible.repository.BookRepository
 
 

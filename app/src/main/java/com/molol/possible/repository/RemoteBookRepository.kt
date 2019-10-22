@@ -1,5 +1,6 @@
 package com.molol.possible.repository
-
+// daniel mastracchio mastra@gmail.com
+//
 import com.molol.possible.model.Book
 import org.json.JSONArray
 import org.json.JSONObject
