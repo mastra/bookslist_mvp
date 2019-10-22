@@ -3,6 +3,7 @@ package com.molol.possible
 //
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.molol.possible.model.Book
 import kotlinx.android.synthetic.main.activity_main.*
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity(), BookView {
         recyclerView.addItemDecoration(dividerItemDecoration)
 
         doAsync {
+            progressBar.visibility = View.VISIBLE
             presenter.getBooks()
         }
     }
@@ -48,6 +50,7 @@ class MainActivity : AppCompatActivity(), BookView {
 
     override fun showBooks(books: List<Book>) {
         runOnUiThread {
+            progressBar.visibility = View.GONE
             adapter.books = books
         }
     }
