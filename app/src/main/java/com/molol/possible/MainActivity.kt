@@ -8,17 +8,23 @@ import com.molol.possible.repository.BookRepository
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.doAsync
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.molol.possible.presenter.BookPresenter
+import com.molol.possible.presenter.BookView
+import com.molol.possible.repository.RemoteBookRepository
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), BookView {
+
+
+    private val presenter = BookPresenter( RemoteBookRepository() )
 
     private lateinit var linearLayoutManager: LinearLayoutManager
     private var adapter = BookRecyclerAdapter()
-    lateinit var books : List<Book>
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        presenter.attach(this)
 
         linearLayoutManager = LinearLayoutManager(this)
         adapter = BookRecyclerAdapter()
@@ -28,12 +34,24 @@ class MainActivity : AppCompatActivity() {
         )
         recyclerView.addItemDecoration(dividerItemDecoration)
 
+
         doAsync {
-            val repo = BookRepository()
-            books = repo.getBooks()
-            runOnUiThread {
-                adapter.books = books
-            }
+
+            presenter.getBooks()
+
         }
     }
+
+    override fun onDestroy() {
+        presenter.detach()
+        super.onDestroy()
+
+    }
+
+    override fun showBooks(books: List<Book>) {
+        runOnUiThread {
+            adapter.books = books
+        }
+    }
+
 }
