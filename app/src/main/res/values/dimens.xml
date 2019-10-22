@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="image_book_size">100dp</dimen>
+    <dimen name="title_paddding">8dp</dimen>
+    <dimen name="title_size">16dp</dimen>
+</resources>
